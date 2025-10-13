@@ -1,13 +1,15 @@
 
 import './App.css'
+import { Routes,Route } from 'react-router-dom'
+import HomePage from '../src/components/HomePage'
 
 function App() {
 
   return (
     <>
-     <div className="">
-      <h2 className='text-cyan-300'>hellow world</h2>
-     </div>
+     <Routes>
+      <Route element={<HomePage></HomePage>} path='/'></Route>
+     </Routes>
     </>
   )
 }
