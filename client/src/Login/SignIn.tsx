@@ -10,7 +10,7 @@ export default function SignIn() {
     const {setUser}=useContext(AuthUserContext)
     const navegate=useNavigate()
     const [userLogin, setuserLogin] = useState({
-        email:"nino@gmail.com",
+        email:"condorenajoshua98@gmail.com",
         password:""
     })
     const onLogin=async()=>{
