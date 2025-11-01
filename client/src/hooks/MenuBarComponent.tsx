@@ -1,10 +1,11 @@
 
 import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarShortcut, MenubarTrigger } from '@/components/ui/menubar'
-import { AuthUserContext } from '@/UserProvider/UserProvide'
+import { useUserStore } from '@/store/useUserStore'
+
 import { Menu } from 'lucide-react'
-import { useContext } from 'react'
-export default function MenuBarComponent({estadoactual}) {
-    const {user}=useContext(AuthUserContext)
+
+export default function MenuBarComponent({estadoactual}) {    
+    const {userA}=useUserStore()
   return (
     <Menubar className='bg-zinc-800 border-0'>
   <MenubarMenu >
@@ -13,7 +14,7 @@ export default function MenuBarComponent({estadoactual}) {
     </MenubarTrigger>
     <MenubarContent  className='bg-zinc-800 text-white border-0'>
       <MenubarItem>
-        {user?user.fullname:"no hay fullname"}<MenubarShortcut>{user?user.profile:"..."}</MenubarShortcut>
+        {userA?userA.fullname:"no hay fullname"}<MenubarShortcut>{userA?userA.profile:"..."}</MenubarShortcut>
       </MenubarItem>
       <MenubarItem>My profile</MenubarItem>
       <MenubarSeparator />
