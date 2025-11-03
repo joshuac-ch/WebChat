@@ -14,7 +14,7 @@ export default function ChannelPage() {
       <div className="m-4 text-white">
         {channels.map((c,i)=>{
           return(
-            <Link onClick={JoinChannel} to={`/channel/${c._id}`} className="mt-2 flex hover:bg-white/20 flex-row justify-between items-center rounded-2xl p-2" key={i}>
+            <Link onClick={()=>JoinChannel({canalID:c._id})} to={`/channel/${c._id}`} className="mt-2 flex hover:bg-white/20 flex-row justify-between items-center rounded-2xl p-2" key={i}>
               <div className="flex flex-row gap-4">
                 <div className="">
                   <img src={c.image} className='w-15 h-15 rounded-full' alt="" />
