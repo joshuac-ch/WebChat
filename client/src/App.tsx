@@ -1,34 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
-import { Button } from './components/ui/button'
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from './components/ui/resizable'
+
+import { Route,  Routes } from 'react-router-dom'
+import MainLayout from './layout/MainLayout'
+import HomePage from './Home/HomePage'
+import LonginPage from './Login/LonginPage'
+import SignIn from './Login/SignIn'
+import ChannelSpecific from './Channel/Components/ChannelSpecific'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div className='bg-amber-200'>
-       <ResizablePanelGroup direction="horizontal">
-  <ResizablePanel>One</ResizablePanel>
-  <ResizableHandle />
-  <ResizablePanel>Two</ResizablePanel>
-</ResizablePanelGroup>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <>     
+        <Routes>
+          <Route path='/login' element={<LonginPage></LonginPage>}></Route>
+          <Route path='/sing' element={<SignIn></SignIn>}></Route>
+          <Route element={<MainLayout></MainLayout>}>
+             <Route path='/' element={<HomePage></HomePage>}></Route> 
+             <Route path='/channel/:id' element={<ChannelSpecific></ChannelSpecific>}></Route>
+          </Route>
+         
+        </Routes>
+      
     </>
   )
 }
