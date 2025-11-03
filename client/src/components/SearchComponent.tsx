@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { Input } from "./ui/input"
 import { toast, Toaster } from "sonner"
 import { axiosIntance } from "@/lib/axios"
+import { useMessageStore } from "@/store/useMessageStore"
 
 export default function SearchComponent({channelID,userID}) {
   const {userA,FectUserSpecific}=useUserStore()   
@@ -34,6 +35,7 @@ export default function SearchComponent({channelID,userID}) {
         
     }
   }
+  const {SendMessage}=useMessageStore()
   return (
    <>
    <Toaster></Toaster>
@@ -58,7 +60,7 @@ export default function SearchComponent({channelID,userID}) {
                     <Paperclip></Paperclip>
                 </div>
             </div>
-            <div onClick={CreteMessage} className="bg-indigo-500 p-2 rounded-full">         
+            <div onClick={()=>SendMessage(DataFormMessage)} className="bg-indigo-500 p-2 rounded-full">         
                     <Send className="w-8 h-8"></Send>        
             </div>
         </div>
