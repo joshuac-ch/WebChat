@@ -13,6 +13,18 @@ export const GetChannelID=async(req,res,next)=>{
         next(err)
     }
 }
+export const GetChannelUser=async(req,res,next)=>{
+    try{
+        const {id}=req.params
+        const canalesUser=await ChannelModel.find({miembros:id})
+        if(!canalesUser){
+            return res.status(404).json({message:"No se encontraron canales para ese usuario"})
+        }
+        res.status(200).json(canalesUser)
+    }catch(err){
+        next(err)
+    }
+}
 export const CreateChannel=async(req,res,next)=>{
     try{
         const {title,description,image,miembros}=req.body
