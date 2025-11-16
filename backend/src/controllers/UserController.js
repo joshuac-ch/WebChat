@@ -68,6 +68,20 @@ export const GetAllUser=async(req,res,next)=>{
         next(err)
     }
 }
+export const SearchUserChat=async(req,res,next)=>{
+    try{
+        const {user}=req.params
+        const searchchat=await userModel.find({name:{$regex:user,$options:"i"}})
+        if(!searchchat){
+            return res.status(404).json({message:"No se encontraron coincidencias"})
+        }
+        res.status(200).json(searchchat)
+
+    }catch(err){
+        console.error(err)
+        next(err)
+    }
+}
 export const Login=async(req,res,next)=>{
     try{
         const {email,password}=req.body
@@ -93,6 +107,27 @@ export const UploadCloudnary=async(filePath,folder="uploads")=>{
     }catch(err){
         console.error(err)
        
+    }
+}
+export const CreateChatUser=async(req,res,next)=>{
+    try{    
+        const {usera,userb}=req.params
+        const {title,image,description,miembros,tipo}=req.body
+        const existe=await ChannelModel.findOne({tipo:"privado",miembros:{$all:[usera,userb]}})
+        if(existe){
+            return res.status(200).json(existe)
+        }        
+        const chatuser=await ChannelModel.create({
+            title,
+            image,
+            description,
+            miembros:[usera,userb],
+            tipo:"privado"            
+        })        
+        return res.status(201).json(existe)
+    }catch(err){
+        console.error(err)
+        next(err)
     }
 }
 export const EditUser=async(req,res)=>{
