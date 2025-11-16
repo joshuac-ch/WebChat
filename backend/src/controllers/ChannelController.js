@@ -42,6 +42,18 @@ export const CreateChannel=async(req,res,next)=>{
         next(err)
     }
 }
+export const SearchChannel=async(req,res)=>{
+    try{
+        const {query}=req.params
+       const search=await ChannelModel.find({title:{$regex:query,$options:"i"}})    
+        if(!search){
+            return res.status(404).json({message:"No se enonctraron coincidencias"})
+        }
+        return res.status(200).json(search)
+    }catch(err){
+        console.error(err)
+    }
+}
 export const GetAllChannel=async(req,res,next)=>{
     try{
         const channels=await ChannelModel.find()
