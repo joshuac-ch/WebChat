@@ -1,5 +1,7 @@
+import { configDotenv } from "dotenv";
 import mongoose from "mongoose";
 
+configDotenv()
 export const CreateConexion=async()=>{
     const connect=await mongoose.connect(process.env.MONGOURL)
     if(connect){
