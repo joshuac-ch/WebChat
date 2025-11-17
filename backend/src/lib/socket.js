@@ -20,9 +20,29 @@ export const InitialSoeckt=(server)=>{
             const message=await Messagemodel.find({channel:canalID})
             sokect.emit("mostrarMessage",message)            
         })
+        sokect.on("joinchat",async({chatID,userID})=>{
+            sokect.join(chatID)
+            console.log(`El userID ${userID} se unio al canal ${chatID}`)
+            const messagesChat=await Messagemodel.find({channel:chatID})
+            sokect.emit("MostrarMessageChat",messagesChat)
+        })
+        sokect.on("leavechat",({chatID,userID})=>{
+            sokect.leave(chatID)
+            console.log("Se salio del chat personal ")
+        })
         sokect.on("leavechannel",({canalID,userID})=>{
             console.log(`El usuario ${userID} salio del canal ${canalID}`)
             sokect.leave(canalID)
+        })
+        sokect.on("SendMessageChat",async(data)=>{
+            const {content,User,channel}=data
+            const messagesChat=await Messagemodel.create({
+                content,
+                User,
+                channel
+            })
+           
+            io.to(channel).emit("RevivedMessageChat",messagesChat)
         })
         sokect.on("CreateMessage",async(data)=>{
             const {content,User,channel}=data
