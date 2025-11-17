@@ -25,6 +25,29 @@ export const GetChannelUser=async(req,res,next)=>{
         next(err)
     }
 }
+export const GetChannelCategoria=async(req,res,next)=>{
+    try{
+        const {id}=req.params
+
+        const channeluser=await ChannelModel.find({ miembros:id})
+        if(!channeluser){
+            return res.status(200).json("No se ecnontraron chats")
+        }
+        res.status(200).json(channeluser)
+    }catch(err){
+        console.error(err)
+        next(err)
+    }
+}
+export const DeleteChatUSER=async(req,res,next)=>{
+    const {id}=req.params
+    const delchatuser = await ChannelModel.findById(id)
+    if(!delchatuser){
+        return res.status(404).json({message:"No se encontro ese canal"})
+    }
+    await ChannelModel.deleteOne({_id:id})
+    return res.status(200).json({message:"Chat eliminado"})
+}
 export const CreateChannel=async(req,res,next)=>{
     try{
         const {title,description,image,miembros}=req.body
