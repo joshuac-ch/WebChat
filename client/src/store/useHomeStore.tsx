@@ -7,10 +7,13 @@ interface Homestore{
     FecthChannelAll:()=>Promise<void>
     ChannelSpecific:(id)=>Promise<void>
     channelSpecific:[]
+    AllchannelUser:(id)=>Promise<void>
+    channelUser:[]
 }
 export const useHomeStore=create<Homestore>((set)=>({
     error:null,
     isloading:false,
+    channelUser:[],
     channelSpecific:[],
     ChannelSpecific:async(id)=>{
         set({isloading:true,error:null})
@@ -30,5 +33,14 @@ export const useHomeStore=create<Homestore>((set)=>({
         }catch(err){
             set({error:err})
         }
-    }    
+    },   
+    AllchannelUser:async(id)=>{
+       set({error:null,isloading:true})
+       try{
+        const {data}=await axiosIntance.get(`/channel/u/a/${id}`)
+        set({channelUser:data})
+       }catch(err){
+        set({error:err})
+       }
+    } 
 }))   
