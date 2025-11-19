@@ -16,8 +16,8 @@ export default function ChannelPage() {
     <>
       <div className="m-4 text-white">
         {channelUser.map((c,i)=>{
-          const canales=c.tipo=="publico"
-          const chatsusers=c.tipo=="privado"
+          const canales=c.categoria=="canal"
+          const chatsusers=c.categoria=="chat"
           return(
            <div className="">
              {canales&&(
