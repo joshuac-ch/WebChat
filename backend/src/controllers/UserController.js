@@ -6,13 +6,26 @@ import { ChannelModel } from "../models/chanalesModel.js";
 export const CreateUsuariosID=async(req,res,next)=>{
     try{        
         const {name,last_name,number,email,password,profile}=req.body
+        let frase=["a","e","i","o","u","N","C","A","G","5","1","3","4"]       
+        let iconsUsers=["https://i.pinimg.com/736x/9e/62/b0/9e62b0a0716c905d2e4dd5d6eb6a20dd.jpg",
+            "https://i.pinimg.com/1200x/c4/fa/55/c4fa5592d75079ead60074ab766a9699.jpg",
+            "https://i.pinimg.com/736x/ee/05/07/ee05078f5829ddc80ff029accb07a4c0.jpg",
+            "https://i.pinimg.com/736x/93/c9/02/93c9029bc3786a09e388d989a4290055.jpg",
+            "https://i.pinimg.com/736x/4f/bc/7c/4fbc7cecacaec224436b811e8f64f185.jpg",
+            "https://i.pinimg.com/736x/cf/99/41/cf9941003f49ac0c192c3f4b3f3de679.jpg",
+            "https://i.pinimg.com/736x/a7/71/6d/a7716dc9079017ea2b71ebf1953828a3.jpg",
+            "https://i.pinimg.com/736x/46/83/9c/46839c09a19ab8b87364ee1af806de12.jpg"
+        ]
+        const randomIconDefault=Math.floor(Math.random()*iconsUsers.length)
+        let username=name.slice(0,2)+last_name.slice(3,4)+"_"+frase[Math.floor(Math.random())]
         const user=await userModel.create({
             name,
             last_name,
             number,
             email,
             password,
-            profile
+            profile:iconsUsers[randomIconDefault],
+            username:username
         })
         if(user){
             await ChannelModel.create({
@@ -20,7 +33,8 @@ export const CreateUsuariosID=async(req,res,next)=>{
                 description:"",
                 image:"https://res.cloudinary.com/dvxnngyrr/image/upload/v1762302890/1072313-12926_qplstv.jpg",
                 miembros:user._id,
-                tipo:"privado"
+                tipo:"privado",
+                categoria:"chat"
             })
         }
         res.status(200).json({message:"Se creo el usuario",user})
@@ -113,8 +127,9 @@ export const CreateChatUser=async(req,res,next)=>{
     try{    
         const {usera,userb}=req.params
         const {title,image,description,miembros,tipo}=req.body
-        const existe=await ChannelModel.findOne({tipo:"privado",miembros:{$all:[usera,userb]}})
+        const existe=await ChannelModel.findOne({categoria:"chat",miembros:{$all:[usera,userb]}})
         if(existe){
+            console.log("ya existe")
             return res.status(200).json(existe)
         }        
         const chatuser=await ChannelModel.create({
@@ -122,20 +137,23 @@ export const CreateChatUser=async(req,res,next)=>{
             image,
             description,
             miembros:[usera,userb],
-            tipo:"privado"            
-        })        
-        return res.status(201).json(existe)
+            tipo:"privado",
+            categoria:"chat"            
+        })       
+         console.log("se creo")
+        return res.status(201).json(chatuser)
     }catch(err){
         console.error(err)
         next(err)
     }
 }
+
 export const EditUser=async(req,res)=>{
     try{
         const {id}=req.params
         const {name,last_name,profile,bio}=req.body
-        let frase=["a","e","i","o","u","N","C","A","G","5","1","3","4"]       
-        let username=name.slice(0,2)+last_name.slice(3,4)+"_"+frase[Math.floor(Math.random())]
+        //let frase=["a","e","i","o","u","N","C","A","G","5","1","3","4"]       
+        //let username=name.slice(0,2)+last_name.slice(3,4)+"_"+frase[Math.floor(Math.random())]
         let imageURL=profile;
         if(req.file){
             imageURL = await UploadCloudnary(req.file.path, "users");
@@ -146,7 +164,7 @@ export const EditUser=async(req,res)=>{
             name,
             last_name,    
             bio,       
-            username, 
+            //username, 
             profile:imageURL
         }
         const UpdateUser=await userModel.findByIdAndUpdate(id,EditForm,{new:true})
