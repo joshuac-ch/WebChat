@@ -32,6 +32,7 @@ export const InitialSoeckt=(server)=>{
         })
         sokect.on("leavechannel",({canalID,userID})=>{
             console.log(`El usuario ${userID} salio del canal ${canalID}`)
+              console.log("Se salio del chat grupal  ")
             sokect.leave(canalID)
         })
         sokect.on("SendMessageChat",async(data)=>{
