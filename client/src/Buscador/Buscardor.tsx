@@ -2,7 +2,7 @@ import { Input } from "@/components/ui/input";
 import LeftButtonComponent from "@/hooks/LeftButtonComponent";
 import { Search } from "lucide-react";
 import { useState } from "react";
-import Chats from "./Components/Chats";
+import Chats from "./Components/chats/Chats";
 import Channels from "./Components/Channels";
 import Post from "./Components/Post";
 
