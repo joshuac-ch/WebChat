@@ -8,10 +8,14 @@ import { Button } from "./ui/button"
 import { useState } from "react"
 import { axiosIntance } from "@/lib/axios"
 import { toast } from "sonner"
+import SearchChat from "./SearchChat"
+
 
 export default function PlantillaChats({datachat,fecha_create,foto,mensajes,id}) {
+  
     const {userA}=useUserStore()
-    const [iniciar, setiniciar] = useState(false)    
+    const [iniciar, setiniciar] = useState(false)   
+    
     const CreateChat=async()=>{
         try{
             await axiosIntance.post(`/users/chat/private/${userA._id}/${datachat._id}`,{
@@ -37,7 +41,7 @@ export default function PlantillaChats({datachat,fecha_create,foto,mensajes,id})
             <div className="">
                 <Button onClick={CreateChat}>Iniciar Chat</Button>
             </div>
-            {iniciar&&(
+            
                  <div className="">
                     <div className="mt-4">
                         <p>{new Date(fecha_create).toLocaleDateString()??""}</p>
@@ -47,12 +51,12 @@ export default function PlantillaChats({datachat,fecha_create,foto,mensajes,id})
                         <img src={foto} className='mt-2 w-50 h-50 object-cover rounded-full' alt="" />
                     </div>
                  </div>
-            )}
+          
           <div className="flex flex-col gap-3 px-12 p-4 items-start">
               {mensajes?.length>0?
               mensajes.map((m,i)=>{
                 return(
-                  <div key={i} className="relative flex flex-row items-end group">
+                  <div  key={i} className="relative flex flex-row items-end group">
                     <div  className='relative p-2 rounded-md max-w-100 min-w-25 min-h-15  bg-zinc-800'>
                     <p className='text-start'>{m.content}</p>
                     <div className="">
@@ -73,7 +77,8 @@ export default function PlantillaChats({datachat,fecha_create,foto,mensajes,id})
        </ScrollArea>
        </div>
        <div className="flex flex-row justify-center">
-          <SearchComponent userID={userA?._id} channelID={id}></SearchComponent>
+          <SearchChat ></SearchChat>
+         
        </div>
     </div>
   )
