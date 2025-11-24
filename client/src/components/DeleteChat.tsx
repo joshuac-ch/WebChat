@@ -1,4 +1,4 @@
-import { Delete } from 'lucide-react'
+import { Trash2 } from 'lucide-react'
 
 import { Button } from './ui/button'
 import { axiosIntance } from '@/lib/axios'
@@ -16,9 +16,9 @@ export default function DeleteChat({id}) {
    }
   return (
    <>
-   <div className="">
-    <Button className='bg-red-400' onClick={()=>DeleteChat(id)} variant={'ghost'}>
-        <Delete></Delete>
+   <div className="flex justify-end">
+    <Button onClick={()=>DeleteChat(id)} variant={'ghost'}>
+        <Trash2></Trash2>
     </Button>
    </div>
    </>
