@@ -19,7 +19,7 @@ export default function ChannelPage() {
           const canales=c.categoria=="canal"
           const chatsusers=c.categoria=="chat"
           return(
-           <div className="">
+           <div className="" key={i}>
              {canales&&(
               <Link onClick={()=>JoinChannel({canalID:c._id})} to={`/channel/${c._id}`} className="mt-2 flex hover:bg-white/20 flex-row justify-between items-center rounded-2xl p-2" key={i}>
               <div className="flex flex-row gap-4">
