@@ -20,6 +20,7 @@ interface MessageStore{
     currentchat:null
     messageChat:any[]
     SendMessageChat:()=>Promise<void>
+    SendMessageFile:()=>Promise<void>
 }
 const socket=io("http://localhost:3500")
 export const useMessageStore=create<MessageStore>((set,get)=>({
@@ -93,6 +94,7 @@ export const useMessageStore=create<MessageStore>((set,get)=>({
             channel:currentchat
         })
     },
+
     //problema que hubo con el enviar el mensaje a otros se debia a que no se 
     // actualizaba el chanel id como pensabamos teniamos que enviar el currentchanmnel
     SendMessage:(data)=>{
@@ -104,6 +106,34 @@ export const useMessageStore=create<MessageStore>((set,get)=>({
             User:userA._id,
             channel:currentchannel
         })
+    },
+    SendMessageFile:(data)=>{
+        const { currentchannel } = useMessageStore.getState();
+        const { userA } = useUserStore.getState();
+
+        const file = data.imageFile;
+
+        if (!file) {
+            // Mensaje solo de texto
+            socket.emit("SendMessageFiles", {
+                imageURL: null,
+                text: data.text,
+                User: userA._id,
+                channel: currentchannel
+            });
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = () => {
+            socket.emit("SendMessageFiles", {
+            imageURL: reader.result, // base64 correcto
+            text: data.text,
+            User: userA._id,
+            channel: currentchannel
+            });
+        };
+        reader.readAsDataURL(file);
     }
         
 }))
