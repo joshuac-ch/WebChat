@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { type } from "os";
 const SchemaChannel=mongoose.Schema({
     title:{
         type:String,
@@ -19,7 +20,12 @@ const SchemaChannel=mongoose.Schema({
         type:String,
         enum:["publico","privado"],
         default:"publico"
-    }
+    },
+    categoria:{
+        type:String,
+        enum:["canal","chat","grupo"],
+        default:"canal"
+    }    
     
 },{timestamps:true})
 /** @type {import("mongoose").Model<any>} */
