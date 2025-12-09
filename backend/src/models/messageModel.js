@@ -1,16 +1,17 @@
 import mongoose from "mongoose";
-const MessageSchema=mongoose.Schema({
-    senderID:{
+const MessageSchema=mongoose.Schema({    
+    imageURL:{
         type:String,
         required:false
     },
-    recivedID:{
+    type:{
         type:String,
-        required:false
+        enum:["text","image","mix"],
+        default:"text"
     },
     content:{
         type:String,
-        required:true
+        required:false
     },
     channel:[{
         type:mongoose.Schema.Types.ObjectId,
