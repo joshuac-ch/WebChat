@@ -30,13 +30,9 @@ export default function PlantillaChats({datachat,fecha_create,foto,mensajes,id})
             toast.error("ocurrio un error")
         }
     }
+   
   return (
-    <div className="text-white flex flex-col h-200 justify-start w-full">
-       <div className="">
-           <HearderChat data={datachat}></HearderChat>
-       </div>
-       <div className="h-165">
-       <ScrollArea className='h-full'>
+      <ScrollArea className='h-165'>
         <div className="h-full flex flex-col justify-start">
             <div className="">
                 <Button onClick={CreateChat}>Iniciar Chat</Button>
@@ -52,18 +48,21 @@ export default function PlantillaChats({datachat,fecha_create,foto,mensajes,id})
                     </div>
                  </div>
           
-          <div className="flex flex-col gap-3 px-12 p-4 items-start">
+          <div className="flex flex-col gap-3 px-12 p-4 w-full">
               {mensajes?.length>0?
               mensajes.map((m,i)=>{
+                const usermessage=m.User[0]==userA._id
                 return(
-                  <div  key={i} className="relative flex flex-row items-end group">
-                    <div  className='relative p-2 rounded-md max-w-100 min-w-25 min-h-15  bg-zinc-800'>
-                    <p className='text-start'>{m.content}</p>
+                  <div  key={i} className={`relative flex flex-row items-end group w-full ${usermessage?"justify-end":"justify-start"} `}>
+                    
+                      <div  className='relative p-2 rounded-md max-w-100 min-w-25 min-h-15  bg-zinc-800'>
+                    <p className={`text-start`}>{m.content}</p>
                     <div className="">
-                      <p className='text-end text-[13px] text-gray-500'>{new Date(m.createdAt).getFullYear()}</p>
+                      <p className='text-end text-[13px] text-gray-500'>{new Date(m.createdAt).toLocaleDateString([], {hour: "2-digit", minute:"2-digit"})}</p>
                     </div>
                     
                   </div>
+                   
                   <div className="cursor-pointer ml-2 border-2  border-white/20 bg-zinc-800 rounded-md hidden group-hover:block transition-all duration-300 ">
                       <ArrowUpRight />
                     </div>
@@ -75,11 +74,8 @@ export default function PlantillaChats({datachat,fecha_create,foto,mensajes,id})
           </div>
         </div>
        </ScrollArea>
-       </div>
-       <div className="flex flex-row justify-center">
-          <SearchChat ></SearchChat>
-         
-       </div>
-    </div>
+       
+      
+  
   )
 }
