@@ -42,8 +42,9 @@ export const useSearchStore=create<UseSearch>((set)=>({
     ShowSpecificUser:async(user)=>{
         set({isloading:true,error:null})
         try{
-            const {data}=await axiosIntance.get(`/users/${user}`)
-            set({datauser:data})
+            const {data}=await axiosIntance.get(`/users/search/${user}`)
+            
+            set({datauser:data.user})
         }catch(err:any){
             set({error:err})
         }finally{
