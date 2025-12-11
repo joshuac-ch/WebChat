@@ -23,7 +23,7 @@ const SchemaChannel=mongoose.Schema({
     },
     categoria:{
         type:String,
-        enum:["canal","chat","grupo"],
+        enum:["canal","chat","grupo","personal"],
         default:"canal"
     }    
     
