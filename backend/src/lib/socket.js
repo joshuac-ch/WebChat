@@ -1,5 +1,6 @@
 import { Server, Socket } from "socket.io";
 import { Messagemodel } from "../models/messageModel.js";
+import { UploadCloudnary } from "../controllers/UserController.js";
 
 export const InitialSoeckt=(server)=>{
     const io=new Server(server,{
@@ -54,6 +55,22 @@ export const InitialSoeckt=(server)=>{
             })        
             //para que todos los del grupo lo reciban    
             io.to(channel).emit("RecivedMessage",createMessage)
+        })
+        sokect.on("SendMessageFiles",async(data)=>{
+            const {imageURL,text,channel,User}=data
+            let imageFile=null;
+            if(imageURL){
+                const upload=await UploadCloudnary(imageURL);
+                imageFile=upload.secure_url;
+            }
+            const CreateMessageFile=await Messagemodel.create({
+                imageURL:imageFile,
+                content:text,
+                type:"mix",
+                channel,
+                User
+            })
+            io.to(channel).emit("RevivedMessage",CreateMessageFile)
         })
     })
 }
