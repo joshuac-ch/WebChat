@@ -34,7 +34,7 @@ export const CreateUsuariosID=async(req,res,next)=>{
                 image:"https://res.cloudinary.com/dvxnngyrr/image/upload/v1762302890/1072313-12926_qplstv.jpg",
                 miembros:user._id,
                 tipo:"privado",
-                categoria:"chat"
+                categoria:"personal"
             })
         }
         res.status(200).json({message:"Se creo el usuario",user})
@@ -54,6 +54,48 @@ export const UserSpecific=async(req,res,next)=>{
     }catch(err){
         console.error(err)
         next(err)
+    }
+}
+export const SearchChatTest=async(req,res)=>{
+    try{      
+        const {id}=req.params
+        const modelo=await userModel.findById({_id:id})
+        if(!modelo){
+            return res.status(404).json({message:"No se encontro el id"})
+        }
+        res.status(200).json(modelo)
+    }catch(err){{
+        console.error(err)
+    }}
+}
+export const SearchSpecificChat=async(req,res)=>{
+    try{
+        const {id}=req.params
+        const chats=await ChannelModel.find({miembros:id,categoria:"chat"})
+        if(!chats){
+            return res.status(404).json({message:"No se encontraron coincidencias"})
+        }
+         // 2. Encontramos EL chat que tiene 2 miembros (tú + otra persona)
+        const chatPrivado = chats.find(c => c.miembros.length === 2);
+        
+        // 3. Sacamos el otro integrante
+        const otherUserId = chatPrivado?.miembros.find(u => u.toString() !== id);
+
+        // 4. Obtenemos el chat completo usando $all ✔
+        const chatCompleto = await ChannelModel.findOne({
+            miembros: { $all: [id, otherUserId] },
+            categoria: "chat"
+        });
+        const usercomplete=await userModel.findOne({_id:otherUserId})
+       return res.status(200).json({
+            ok: true,
+            yo: id,
+            con: otherUserId,
+            chat: chatCompleto,
+            user:usercomplete
+        });
+    }catch(err){
+        console.error(err)
     }
 }
 export const GetUserID=async(req,res,next)=>{
