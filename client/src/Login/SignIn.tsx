@@ -3,7 +3,7 @@ import { Input } from '@/components/ui/input'
 import { axiosIntance } from '@/lib/axios'
 import { AuthUserContext } from '@/UserProvider/UserProvide'
 import { useContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import telegramIcon from "../assets/telegram.svg"
 import { toast, Toaster } from 'sonner'
 export default function SignIn() {
@@ -50,6 +50,9 @@ export default function SignIn() {
     </div>
     <div className="mt-4">
         <Button className='w-80 bg-indigo-500' onClick={onLogin}>Iniciar Session</Button>
+    </div>
+    <div className="flex flex-row items-end w-80 mt-4 justify-end">
+        <Link to={"/login"}>Registrarse</Link>
     </div>
     </div>
     </div>
