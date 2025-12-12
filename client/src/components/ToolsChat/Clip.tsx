@@ -6,15 +6,17 @@ import { Button } from "../ui/button";
 interface ClipProps{
   onPreview:(url:string|null)=>void;
   OnState:(estado:boolean|null)=>void
+  OnFile:(file:File|null)=>void
 
 }
-export default function Clip({onPreview,OnState}:ClipProps) {
+export default function Clip({onPreview,OnState,OnFile}:ClipProps) {
   
   const fileref= useRef<HTMLInputElement>(null)  
   const OpenFile=(file:File)=>{       
        if (!file) return;
           const url = URL.createObjectURL(file)
           onPreview(url)
+          OnFile(file)
           OnState(true)
           // Muy importante:
           // Resetea el input para poder seleccionar la MISMA imagen otra vez.
