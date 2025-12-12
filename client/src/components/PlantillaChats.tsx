@@ -70,7 +70,7 @@ export default function PlantillaChats({datachat,fecha_create,foto,mensajes,id})
                 )
               })
               :
-              "cargando..."}
+              ""}
           </div>
         </div>
        </ScrollArea>
