@@ -18,6 +18,7 @@ export default function ChannelPage() {
         {channelUser.map((c,i)=>{
           const canales=c.categoria=="canal"
           const chatsusers=c.categoria=="chat"
+          const personal=c.categoria=="personal"
           return(
            <div className="" key={i}>
              {canales&&(
@@ -52,7 +53,24 @@ export default function ChannelPage() {
                 <DeleteChat id={c._id}></DeleteChat>
                 <p>{c.updatedAt?c.updatedAt.split("T")[0]:""}</p>
               </div>
-            </Link>)}            
+            </Link>)}
+            {personal&&(
+              <Link onClick={()=>JoinChat({chatID:c.miembros[0]})} to={`/chatuser/${c.miembros[0]}`} className="mt-2 flex hover:bg-white/20 flex-row justify-between items-center rounded-2xl p-2" key={i}>
+              <div className="flex flex-row gap-4">
+                <div className="">
+                  <img src={c.image}  className='w-15 h-15 rounded-full object-cover' alt="" />
+                </div>
+                <div className="text-start">                 
+                  <p>{c._id}</p>
+                  <p>{c.description}</p>
+                </div>
+              </div>
+              <div className="">
+                <DeleteChat id={c._id}></DeleteChat>
+                <p>{c.updatedAt?c.updatedAt.split("T")[0]:""}</p>
+              </div>
+            </Link>
+            )}            
            </div>
           )
         })}
@@ -60,3 +78,5 @@ export default function ChannelPage() {
     </>
   )
 }
+//ya funciona los chats normalmente ahora lo que falta es que el al hacer click que muestre los datos para ello usar la funcion ya creada  connectuser:[],      
+// ShowConnectAnotherUser
