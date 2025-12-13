@@ -37,10 +37,11 @@ export const useHomeStore=create<Homestore>((set)=>({
     AllchannelUser:async(id)=>{
        set({error:null,isloading:true})
        try{
-        const {data}=await axiosIntance.get(`/channel/u/a/${id}`)
+        const {data}=await axiosIntance.get(`/channel/chat-users/${id}`)
         set({channelUser:data})
        }catch(err){
         set({error:err})
        }
     } 
+    //http://localhost:3500/api/channel/chat-users/6935c5d9511e5b701ad48440
 }))   
