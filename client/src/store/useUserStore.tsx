@@ -12,6 +12,7 @@ interface UserStore{
     setmiembros:(miembros:string[])=>Promise<void>
     miembrosID:[]
     setmiembrosID:(miembrosID:string[])=>Promise<void>
+    
 }
 export const useUserStore=create<UserStore>((set)=>({
     userA:[],
