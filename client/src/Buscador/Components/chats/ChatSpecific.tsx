@@ -12,7 +12,7 @@ export default function ChatSpecific() {
   const {userid}=useParams()
   const {ShowSpecificUser,datauser}=useSearchStore()  
   const {FecthChannelAll,channels}=useHomeStore()
-  console.log(channels)
+  
   useEffect(()=>{
     ShowSpecificUser(userid)
     //FecthChannelAll()
@@ -23,21 +23,21 @@ export default function ChatSpecific() {
   })
   useEffect(()=>{
     if(datauser){
-        setuser({create:datauser.creatdAt,image:datauser.profile})
+        setuser({create:datauser.createdAt,image:datauser.profile})
     }
   },[datauser])
-  const {messageChat}=useMessageStore()
-  
+  const {messageChat}=useMessageStore()  
   
   return (
     <>
      <div className="text-white flex flex-col h-full justify-start w-full">
-        <div className="">
+        <div className="">         
             <HearderChat data={datauser}></HearderChat>
         </div>
         <ScrollArea className="h-full">
          <PlantillaChats mensajes={messageChat} datachat={datauser} fecha_create={user.create} foto={user.image} id={userid}></PlantillaChats>
         </ScrollArea>
+        
      </div>
      <div className="text-white flex flex-row justify-center">
         <SearchChat></SearchChat>         
