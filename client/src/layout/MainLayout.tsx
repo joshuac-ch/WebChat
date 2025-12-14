@@ -20,6 +20,7 @@ export default function MainLayout() {
                      
                     </div>                
             </ResizablePanel>
+            
         </ResizablePanelGroup>
     </div>
     </>
