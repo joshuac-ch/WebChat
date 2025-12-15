@@ -48,6 +48,27 @@ export const DeleteChatUSER=async(req,res,next)=>{
     await ChannelModel.deleteOne({_id:id})
     return res.status(200).json({message:"Chat eliminado"})
 }
+export const UpdateChannel=async(req,res)=>{
+    try{
+        const {id}=req.params
+        const {title,description,tipo,image}=req.body
+        let imageFile=image
+        const modelo=await ChannelModel.findById(id)
+        if(!modelo){
+            return res.status(404).json({message:"No se encontro el id"})
+        }
+        if(req.file){
+            imageFile=await UploadCloudnary(req.file.path)
+            
+        }
+        const formData={title,description,tipo,image:imageFile}
+        const update=await ChannelModel.findByIdAndUpdate(id,formData,{new:true})
+        res.status(200).json(update)
+    }catch(err){
+        console.error(err)
+        res.status(500).json({message:"Huibo un error"})
+    }
+}
 export const CreateChannel=async(req,res,next)=>{
     try{
         const {title,description,image,miembros}=req.body
