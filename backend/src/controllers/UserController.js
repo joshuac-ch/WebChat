@@ -34,7 +34,7 @@ export const CreateUsuariosID=async(req,res,next)=>{
                 image:"https://res.cloudinary.com/dvxnngyrr/image/upload/v1762302890/1072313-12926_qplstv.jpg",
                 miembros:user._id,
                 tipo:"privado",
-                categoria:"personal"
+                categoria:"personal"//antes era chat 
             })
         }
         res.status(200).json({message:"Se creo el usuario",user})
@@ -59,9 +59,11 @@ export const UserSpecific=async(req,res,next)=>{
 export const SearchChatTest=async(req,res)=>{
     try{      
         const {id}=req.params
-        const modelo=await userModel.findById({_id:id})
+        const modelo=await userModel.findById({_id:id,categoria:"chat"})
         if(!modelo){
-            return res.status(404).json({message:"No se encontro el id"})
+            //const ischannel=await ChannelModel.findById({_id:id,categoria:"personal"})
+            //return res.status(200).json(ischannel)
+            return res.status(404).json({message:"no se encontro"})
         }
         res.status(200).json(modelo)
     }catch(err){{
