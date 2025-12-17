@@ -12,6 +12,7 @@ export default function ChannelPage() {
     AllchannelUser(userA._id)
   },[AllchannelUser,userA])
   const {JoinChannel,JoinChat}=useMessageStore()
+  
   return (
     <>
       <div className="m-4 text-white">
@@ -19,10 +20,11 @@ export default function ChannelPage() {
           const canales=c.categoria=="canal"
           const chatsusers=c.categoria=="chat"
           const personal=c.categoria=="personal"
+          const otherUserId = c.miembros.find(miembro => miembro !== userA._id)
           return(
            <div className="" key={i}>
              {canales&&(
-              <Link onClick={()=>JoinChannel({canalID:c._id})} to={`/channel/${c._id}`} className="mt-2 flex hover:bg-white/20 flex-row justify-between items-center rounded-2xl p-2" key={i}>
+              <Link onClick={()=>JoinChannel({canalID:c._id})} to={`/channel/${c._id}/${userA._id}/`} className="mt-2 flex hover:bg-white/20 flex-row justify-between items-center rounded-2xl p-2" key={i}>
               <div className="flex flex-row gap-4">
                 <div className="">
                   <img src={c.image} className='w-15 h-15 rounded-full object-cover' alt="" />
@@ -39,14 +41,15 @@ export default function ChannelPage() {
             </Link>
             )}
             {chatsusers&&(
-              <Link onClick={()=>JoinChat({chatID:c.miembros[1]})} to={`/chatuser/${c.miembros[1]}`} className="mt-2 flex hover:bg-white/20 flex-row justify-between items-center rounded-2xl p-2" key={i}>
+              
+              <Link onClick={()=>JoinChat({chatID:otherUserId })} to={`/chatuser/${userA._id}/${otherUserId}`} className="mt-2 flex hover:bg-white/20 flex-row justify-between items-center rounded-2xl p-2" key={c._id}>
               <div className="flex flex-row gap-4">
                 <div className="">
                   <img src={c.image}  className='w-15 h-15 rounded-full object-cover' alt="" />
                 </div>
                 <div className="text-start">
                   <p>{c.title}</p>
-                  <p>{c.description}</p>
+                  <p>{c.miembros[1]}</p>
                 </div>
               </div>
               <div className="">
@@ -55,13 +58,13 @@ export default function ChannelPage() {
               </div>
             </Link>)}
             {personal&&(
-              <Link onClick={()=>JoinChat({chatID:c.miembros[0]})} to={`/chatuser/${c.miembros[0]}`} className="mt-2 flex hover:bg-white/20 flex-row justify-between items-center rounded-2xl p-2" key={i}>
+              <Link onClick={()=>JoinChat({chatID:c._id})} to={`/michat/${c.miembros[0]}/`} className="mt-2 flex hover:bg-white/20 flex-row justify-between items-center rounded-2xl p-2" key={i}>
               <div className="flex flex-row gap-4">
                 <div className="">
                   <img src={c.image}  className='w-15 h-15 rounded-full object-cover' alt="" />
                 </div>
                 <div className="text-start">                 
-                  <p>{c._id}</p>
+                  <p>{c.title}</p>
                   <p>{c.description}</p>
                 </div>
               </div>
