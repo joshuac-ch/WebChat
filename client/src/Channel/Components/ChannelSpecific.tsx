@@ -15,8 +15,8 @@ export default function ChannelSpecific() {
     const {channelSpecific,ChannelSpecific}=useHomeStore()
     const {userA}=useUserStore()
     const [DataChannel,setDataChannel]=useState({
-      create:channelSpecific.createdAt,
-      foto:channelSpecific.image            
+      create:channelSpecific?.createdAt,
+      foto:channelSpecific?.image            
     })
     useEffect(()=>{
         if(id){
@@ -25,7 +25,7 @@ export default function ChannelSpecific() {
     },[ChannelSpecific,id])
     useEffect(()=>{
       if(channelSpecific){
-        setDataChannel({create:channelSpecific.createdAt,foto:channelSpecific.image})
+        setDataChannel({create:channelSpecific?.createdAt,foto:channelSpecific.image})
       }
     },[channelSpecific])
     const {messagesChannel}=useMessageStore()
