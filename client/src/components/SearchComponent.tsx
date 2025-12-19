@@ -41,7 +41,7 @@ export default function SearchComponent({channelID,userID}) {
                     <img src={previewImg} className="w-full h-full rounded-md" alt="" />
                     
                 )}
-            <SendMessageFile img={imageFile}></SendMessageFile>
+            <SendMessageFile img={imageFile} channelID={channelID}></SendMessageFile>
         <DialogFooter className="text-black">
             <Button onClick={()=>{
                 setpreviewImg(null)
@@ -50,10 +50,11 @@ export default function SearchComponent({channelID,userID}) {
     </DialogContent>
      
     </Dialog>
-   <div className="flex flex-col">
+    {/* Se modifico esta parte */}
+   <div className="flex flex-col w-full px-10">
         <div className="border-white/20 border-t-1 w-full mb-2 "></div>
         <div className="flex flex-row items-center mb-4 gap-2">  
-            <div className="bg-zinc-800 p-1 rounded-2xl w-180 flex flex-row items-center justify-between">    
+            <div className="bg-zinc-800 p-1 rounded-2xl w-full  flex flex-row items-center justify-between">    
                 <div className="flex flex-row items-center gap-2 ">
                     <div className="">
                         <img src={userA?.profile} className="w-12 h-12 object-cover rounded-full" alt="" />                        
