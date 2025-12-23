@@ -9,7 +9,7 @@ interface UseSearch{
     alluserchat:any[];
     ShowSpecificUser:({user:string})=>Promise<void>
     datauser:any[]
-    ShowConnectAnotherUser:({user:string})=>Promise<void>
+    ShowConnectAnotherUser:({user:string,other:string})=>Promise<void>
     connectuser:any[]
 }
 
@@ -54,10 +54,10 @@ export const useSearchStore=create<UseSearch>((set)=>({
         }
     },
     connectuser:[],
-    ShowConnectAnotherUser:async(user)=>{
+    ShowConnectAnotherUser:async(user,other)=>{
         set({isloading:true,error:null})
         try{
-            const {data}=await axiosIntance.get(`/users/specific-chat/${user}`)
+            const {data}=await axiosIntance.get(`/users/specific-chat/${user}/${other}`)
             set({connectuser:data.user})
         }catch(err:any){
             set({error:err})
