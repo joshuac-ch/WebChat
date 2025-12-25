@@ -72,30 +72,21 @@ export const SearchChatTest=async(req,res)=>{
 }
 export const SearchSpecificChat=async(req,res)=>{
     try{
-        const {id}=req.params
-        const chats=await ChannelModel.find({miembros:id,categoria:"chat"})
-        if(!chats){
-            return res.status(404).json({message:"No se encontraron coincidencias"})
-        }
-         // 2. Encontramos EL chat que tiene 2 miembros (tú + otra persona)
-        const chatPrivado = chats.find(c => c.miembros.length === 2);
-        
-        // 3. Sacamos el otro integrante
-        const otherUserId = chatPrivado?.miembros.find(u => u.toString() !== id);
+        const {me,other}=req.params
+        const chat = await ChannelModel.findOne({
+        miembros: { $all: [me, other] },
+        categoria: "chat"
+        });
+        const user = await userModel.findById(other);
 
-        // 4. Obtenemos el chat completo usando $all ✔
-        const chatCompleto = await ChannelModel.findOne({
-            miembros: { $all: [id, otherUserId] },
-            categoria: "chat"
-        });
-        const usercomplete=await userModel.findOne({_id:otherUserId})
-       return res.status(200).json({
-            ok: true,
-            yo: id,
-            con: otherUserId,
-            chat: chatCompleto,
-            user:usercomplete
-        });
+  return res.json({
+    ok: true,
+    yo: me,
+    con: other,
+    chat,
+    user
+  });
+       
     }catch(err){
         console.error(err)
     }
