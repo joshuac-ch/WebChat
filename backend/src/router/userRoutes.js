@@ -8,7 +8,7 @@ router.get("/:id",UserSpecific)
 //para la busqueda del usuario
 router.get("/search/:id",SearchChatTest)
 //conection entre 2 chats para mostrar su informacion
-router.get("/specific-chat/:id",SearchSpecificChat)
+router.get("/specific-chat/:id/:other",SearchSpecificChat)
 router.get("/g/a",GetAllUser)
 router.get("/g/search/:user",SearchUserChat)
 router.post("/v",Login)
