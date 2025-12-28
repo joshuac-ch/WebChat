@@ -58,7 +58,7 @@ export default function ChannelPage() {
               </div>
             </Link>)}
             {personal&&(
-              <Link onClick={()=>JoinChat({chatID:c._id})} to={`/michat/${c.miembros[0]}/`} className="mt-2 flex hover:bg-white/20 flex-row justify-between items-center rounded-2xl p-2" key={i}>
+              <Link onClick={()=>JoinChat({chatID:c._id})} to={`/personal/${c.miembros[0]}/`} className="mt-2 flex hover:bg-white/20 flex-row justify-between items-center rounded-2xl p-2" key={i}>
               <div className="flex flex-row gap-4">
                 <div className="">
                   <img src={c.image}  className='w-15 h-15 rounded-full object-cover' alt="" />
