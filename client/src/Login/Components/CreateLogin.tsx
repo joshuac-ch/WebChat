@@ -40,40 +40,47 @@ export default function CreateLogin() {
      <div className="">
             <Toaster position={'top-center'} ></Toaster>
      </div>
-    <div className="flex flex-row flex-wrap text-white gap-10 justify-start items-end p-8">
+    <div className="flex flex-row flex-wrap  text-white gap-10 justify-start items-end p-8">
        
-        <div className="flex flex-col items-start">
-            <label htmlFor="" className='mt-4 mb-4' >*Nombre</label>
-            <Input value={FormLoginUser.name}
-             onChange={(e)=>setFormLoginUser({...FormLoginUser,name:e.target.value})} className='w-150' placeholder='ingrese su nombre'></Input>
+        <div className="flex flex-row justify-center gap-4 w-full">
+            <div className="flex flex-col items-start">
+                <label htmlFor="" className='mt-4 mb-4' >*Nombre</label>
+                <Input value={FormLoginUser.name}
+                onChange={(e)=>setFormLoginUser({...FormLoginUser,name:e.target.value})} className='w-100' placeholder='ingrese su nombre'></Input>
+            </div>
+            <div className="flex flex-col items-start">
+                <label htmlFor="" className='mt-4 mb-4'>*Apellido</label>
+                <Input value={FormLoginUser.last_name} 
+                onChange={(e)=>setFormLoginUser({...FormLoginUser,last_name:e.target.value})} className='w-100' placeholder='ingrese un apellido'></Input>
+            </div>
         </div>
-        <div className="flex flex-col items-start">
-            <label htmlFor="" className='mt-4 mb-4'>*Apellido</label>
-            <Input value={FormLoginUser.last_name} 
-            onChange={(e)=>setFormLoginUser({...FormLoginUser,last_name:e.target.value})} className='w-150' placeholder='ingrese un apellido'></Input>
+        <div className="flex flex-row justify-center gap-4 w-full ">
+            <div className="flex flex-col items-start">
+                <label htmlFor="" className='mt-4 mb-4'>*Correo electronico</label>
+                <Input value={FormLoginUser.email} 
+                onChange={(e)=>setFormLoginUser({...FormLoginUser,email:e.target.value})} className='w-100' placeholder='ingrese su correo electronico'></Input>
+            </div>
+            <div className="flex flex-col items-start">
+                <label htmlFor="" className='mt-4 mb-4'>*Telefono</label>
+                <Input value={FormLoginUser.number} 
+                onChange={(e)=>setFormLoginUser({...FormLoginUser,number:e.target.value})} className='w-100' placeholder='ingrese su telefono'></Input>
+            </div>
         </div>
-        <div className="flex flex-col items-start">
-            <label htmlFor="" className='mt-4 mb-4'>*Correo electronico</label>
-            <Input value={FormLoginUser.email} 
-            onChange={(e)=>setFormLoginUser({...FormLoginUser,email:e.target.value})} className='w-150' placeholder='ingrese su correo electronico'></Input>
-        </div>
-        <div className="flex flex-col items-start">
-            <label htmlFor="" className='mt-4 mb-4'>*Telefono</label>
-            <Input value={FormLoginUser.number} 
-            onChange={(e)=>setFormLoginUser({...FormLoginUser,number:e.target.value})} className='w-150' placeholder='ingrese su telefono'></Input>
-        </div>
-        <div className="flex flex-col items-start">
-            <label htmlFor="" className='mt-4 mb-4'>*Password</label>
-            <Input value={FormLoginUser.password} 
-            onChange={(e)=>setFormLoginUser({...FormLoginUser,password:e.target.value})} className='w-150' placeholder='ingrese su nueva contraseña'></Input>
+        <div className="flex flex-row justify-center items-end  gap-4 w-full">
+            <div className="flex flex-col items-start">
+                <label htmlFor="" className='mt-4 mb-4'>*Password</label>
+                <Input value={FormLoginUser.password} 
+                onChange={(e)=>setFormLoginUser({...FormLoginUser,password:e.target.value})} className='w-150' placeholder='ingrese su nueva contraseña'></Input>
+            </div>
+            <div className="px-8">
+               
+                    <Button className='cursor-pointer bg-black hover:bg-indigo-500' onClick={handleSubmit} >Enviar Datos</Button>
+                
+            </div>
         </div>
         
     </div>
-    <div className="p-8 flex justify-start">
-        <div className="">
-            <Button className='cursor-pointer' onClick={handleSubmit} >Enviar Datos</Button>
-        </div>
-    </div>
+    
     </>
   )
 }
