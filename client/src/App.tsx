@@ -9,6 +9,7 @@ import Buscardor from './Buscador/Buscardor'
 import ChatSpecific from './Buscador/Components/chats/ChatSpecific'
 import ChatUser from './Buscador/Components/chats/ChatUser'
 import SearchUsers from './Buscador/Components/SearchUsers'
+import IndexPersonal from './savemessages/IndexPersonal'
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
              <Route path='/buscar' element={<Buscardor></Buscardor>}></Route>   
              <Route path='/chatuser/:id/:userid' element={<ChatSpecific></ChatSpecific>}></Route>   
              <Route path='/michat/:id' element={<ChatUser></ChatUser>}></Route>
+             <Route path='/personal/:id' element={<IndexPersonal></IndexPersonal>}></Route>
              <Route path='/search/:id' element={<SearchUsers></SearchUsers>}></Route>
           </Route>         
         </Routes>      
