@@ -3,7 +3,7 @@ import PlantillaChats from "@/components/PlantillaChats"
 import RigthLayoutUser from "@/components/RigthLayoutUser"
 import SearchChat from "@/components/SearchChat"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import RightLayout from "@/layout/components/RightLayout"
+
 import { useHomeStore } from "@/store/useHomeStore"
 import { useMessageStore } from "@/store/useMessageStore"
 import { useSearchStore } from "@/store/useSearchStore"
@@ -12,6 +12,10 @@ import { useParams } from "react-router-dom"
 
 export default function ChatSpecific() {
   const {userid,id}=useParams()
+  // Ruta de Chat de Usuarios
+  // /chatuser/697d546d547e1dc4dc38291e/697d54b7af6bd57f385ec260
+  // el primero es el id 697d546d547e1dc4dc38291e
+  // el segundo es el userid 697d54b7af6bd57f385ec260
   const {ShowSpecificUser,ShowConnectAnotherUser,connectuser,datauser}=useSearchStore()  
   const {FecthChannelAll,channels}=useHomeStore()
   
@@ -35,7 +39,7 @@ export default function ChatSpecific() {
   const {messageChat}=useMessageStore()  
   
   const [righstate, setrighstate] = useState(false)
-  console.log(connectuser)
+  
   return (
     <>
      <div className="text-white flex flex-col h-full justify-start w-full">
@@ -54,7 +58,7 @@ export default function ChatSpecific() {
         </div>
      </div>
      <div className="text-white flex flex-row justify-center">
-        <SearchChat></SearchChat>         
+        <SearchChat channelID={userid}></SearchChat>         
      </div>
     
     </>
