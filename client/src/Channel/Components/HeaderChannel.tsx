@@ -1,11 +1,11 @@
-import { Button } from '@/components/ui/button'
-import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarTrigger } from '@/components/ui/menubar'
-import { Edit2, Ellipsis, Search, VolumeOff } from 'lucide-react'
+
+
+import Elipsis from '@/Header/Elipsis'
+import { Search } from 'lucide-react'
 
 
 export default function HeaderChannel({data,setrigthstate}) {
-    
-    
+       
   return (
     <div className="pt-2 pb-2 pl-6 pr-6 bg-zinc-800 flex flex-row justify-between items-center">
         <div className="flex flex-row items-center gap-4">
@@ -21,21 +21,8 @@ export default function HeaderChannel({data,setrigthstate}) {
             <div className="">
                 <Search></Search>
             </div>
-            <div className='text-black'>
-                <Menubar>
-                <MenubarMenu>
-                    <MenubarTrigger>
-                        <Ellipsis></Ellipsis>
-                    </MenubarTrigger>
-                    <MenubarContent>                                          
-                        <MenubarItem><Button onClick={()=>setrigthstate(true)}>
-                                <Edit2></Edit2>Editar</Button></MenubarItem>
-                        <MenubarSeparator />
-                        <MenubarItem><VolumeOff></VolumeOff>Notificaciones</MenubarItem>
-                    </MenubarContent>
-                </MenubarMenu>
-                </Menubar>
-               
+            <div className=''>
+                <Elipsis setrigthstate={setrigthstate}></Elipsis>               
             </div>
         </div>
     </div>
