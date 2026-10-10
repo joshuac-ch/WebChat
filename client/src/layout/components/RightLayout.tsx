@@ -44,36 +44,40 @@ export default function RightLayout({data,Onclose}) {
    <>
    <div className="bg-zinc-800 h-full">
         <div  className="flex flex-row justify-between items-center px-2">
-            <div className="flex flex-row items-center gap-2">
-                <div className="" onClick={()=>Onclose(false)}>
-                <LeftButtonComponent></LeftButtonComponent>
-            </div>
-            <p>Editar</p>
+            <div className="flex flex-row items-center gap-2 ">
+                <div className="cursor-pointer" onClick={()=>Onclose(false)}>
+                    <LeftButtonComponent></LeftButtonComponent>
+                </div>
+                <p className="font-semibold text-[14px]">Editar</p>
             </div>
             <div className="">
-                <Button onClick={UpdateChannel} variant={'ghost'}>Guardar</Button>
+                <Button onClick={UpdateChannel}
+                className="cursor-pointer"
+                variant={'ghost'}>Guardar</Button>
             </div>
         </div>
         <div className="">
-        <div className="flex justify-center">           
-            {imagePreview&&(                                  
-                    <img src={imagePreview} className="w-30 h-30 rounded-full" alt="" />                 
-            )}        
-        </div>
-        <div className="mt-4">
-            <input type="file" onChange={handleImage} ref={imageref} className="hidden" name="" id="" />
-        </div>
-        <div className="">
-            <Button variant={'ghost'} onClick={()=>imageref.current?.click()} >Seleccionar imagen</Button>
-        </div>
+            <div className="flex justify-center">           
+                {imagePreview&&(                                  
+                        <img src={imagePreview} className="w-30 h-30 object-cover rounded-full" alt="" />                 
+                )}        
+            </div>
+            <div className="mt-4">
+                <input type="file" onChange={handleImage} ref={imageref} className="hidden" name="" id="" />
+            </div>
+            <div className="">
+                <Button variant={'ghost'}
+                className="cursor-pointer"
+                onClick={()=>imageref.current?.click()} >Seleccionar imagen</Button>
+            </div>
         
         <div className="flex flex-col text-start">
             <div className="p-4">
-            <label htmlFor="">Nombre del canal</label>
+            <label htmlFor="" className="text-[14px] font-semibold">Nombre del canal</label>
             <Input value={EditFormChannel.title} onChange={(e)=>setEditFormChannel({...EditFormChannel,title:e.target.value})}></Input>
         </div>
         <div className="p-4">
-            <label htmlFor="">Descripcion</label>
+            <label htmlFor="" className="text-[14px] font-semibold">Descripcion</label>
             <Input value={EditFormChannel.description} onChange={(e)=>setEditFormChannel({...EditFormChannel,description:e.target.value})}></Input>
         </div>
         <div className="p-4">
@@ -81,20 +85,20 @@ export default function RightLayout({data,Onclose}) {
                 <div className="flex flex-row gap-4 items-center">
                     <BlocksIcon></BlocksIcon>
                     <div className="p-4">
-                        <p>Tipo de canal</p>
-                        <p>{data.tipo}</p>
+                        
+                        <p>Canal {data.tipo}</p>
                     </div>
                 </div>
             </Button>
         </div>
         <div className="p-4">
-            <label htmlFor="">Miembros:</label>
+            <label htmlFor="" className="text-[14px] font-semibold">Miembros:</label>
             <div className="">
                 <p>{data?.miembros.length} actuales</p>
             </div>
         </div>
         <div className="p-4">
-            <label htmlFor="">Administrador:</label>
+            <label htmlFor="" className="text-[14px] font-semibold">Administrador:</label>
             <p>{data.miembros[0]}</p>
         </div>
         </div>
