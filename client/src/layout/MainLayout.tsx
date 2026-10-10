@@ -9,11 +9,11 @@ export default function MainLayout() {
     <>
     <div className="h-200 overflow-hidden bg-zinc-900 w-400 rounded-2xl ">
         <ResizablePanelGroup direction="horizontal">
-            <ResizablePanel defaultSize={5} maxSize={35}>
+            <ResizablePanel className='bg-zinc-800' defaultSize={28} maxSize={32} minSize={28}>
                 <LeftLayout></LeftLayout>
             </ResizablePanel>
         <ResizableHandle className='bg-zinc-700' />
-            <ResizablePanel maxSize={67} defaultSize={60}>               
+            <ResizablePanel defaultSize={70} minSize={40}>               
                     <div style={{backgroundImage:`url(${FondoTelegram})`}} className="relative bg-cover bg-center">
                      
                        <Outlet/>
