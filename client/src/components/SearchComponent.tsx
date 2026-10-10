@@ -29,6 +29,7 @@ export default function SearchComponent({channelID,userID}) {
   const [previewImg, setpreviewImg] = useState<File|null>(null)
   const [estadoDialog, setestadoDialog] = useState(false)
   const [imageFile, setimageFile] = useState<File|null>(null)
+ 
   return (
    <>
    <Toaster></Toaster>
@@ -58,23 +59,20 @@ export default function SearchComponent({channelID,userID}) {
                 <div className="flex flex-row items-center gap-2 ">
                     <div className="">
                         <img src={userA?.profile} className="w-12 h-12 object-cover rounded-full" alt="" />                        
-                    </div>
-                    <div className="">
-                        <Smile className="w-8 h-8"></Smile>
-                    </div>
+                    </div>                   
                 </div>        
             
                 <div className="w-full max-w-140 ">
-                        <Input value={DataFormMessage.content} onChange={(e)=>setDataFormMessage({...DataFormMessage,content:e.target.value})} placeholder="Message"></Input>
-                    </div>
+                    <Input className="" value={DataFormMessage.content} onChange={(e)=>setDataFormMessage({...DataFormMessage,content:e.target.value})} placeholder="Message"></Input>
+                </div>
 
-                <div className="">
+                <div >
                     <Clip onPreview={setpreviewImg} OnFile={setimageFile} OnState={setestadoDialog}></Clip>
                 </div>
                 
             </div>
-            <div onClick={()=>SendMessage(DataFormMessage)} className="bg-indigo-500 p-2 rounded-full">         
-                    <Send className="w-8 h-8"></Send>        
+            <div onClick={()=>SendMessage(DataFormMessage)} className="bg-indigo-500 p-2 rounded-full cursor-pointer hover:bg-indigo-400 duration-300">         
+                    <Send className="w-7 h-7 rotate-45"></Send>        
             </div>
         </div>
    </div>    
