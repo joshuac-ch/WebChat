@@ -1,7 +1,8 @@
-import { Ellipsis, Search } from "lucide-react";
+import Elipsis from "@/Header/Elipsis";
+import { Search } from "lucide-react";
 
 
-export default function HearderChat({data}) {
+export default function HearderChat({data,setrigthstate}) {
   return (
      <div className="pt-2 pb-2 pl-6 pr-6 bg-zinc-800 flex flex-row justify-between items-center">
         <div className="flex flex-row items-center gap-4">
@@ -12,12 +13,12 @@ export default function HearderChat({data}) {
                 <p className='text-start text-xl' >{data.name}</p>                
             </div>
         </div>
-        <div className="flex flex-row gap-6">
+        <div className="flex flex-row items-center gap-6">
             <div className="">
                 <Search></Search>
             </div>
             <div className="">
-                <Ellipsis></Ellipsis>
+                <Elipsis setrigthstate={setrigthstate}></Elipsis>
             </div>
         </div>
     </div>

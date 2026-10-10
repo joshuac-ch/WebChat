@@ -56,6 +56,9 @@ export default function PlantillaChats({datachat,fecha_create,foto,mensajes,id})
                   <div  key={i} className={`relative flex flex-row items-end group w-full ${usermessage?"justify-end":"justify-start"} `}>
                     
                       <div  className='relative p-2 rounded-md max-w-100 min-w-25 min-h-15  bg-zinc-800'>
+                    {m.imageURL&&(
+                      <img src={m.imageURL} className="w-100 h-full object-cover" alt="" />
+                    )}   
                     <p className={`text-start`}>{m.content}</p>
                     <div className="">
                       <p className='text-end text-[13px] text-gray-500'>{new Date(m.createdAt).toLocaleDateString([], {hour: "2-digit", minute:"2-digit"})}</p>
