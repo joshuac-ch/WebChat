@@ -40,42 +40,75 @@ export default function CreateLogin() {
      <div className="">
             <Toaster position={'top-center'} ></Toaster>
      </div>
-    <div className="flex flex-row flex-wrap  text-white gap-10 justify-start items-end p-8">
+    <div className="flex flex-row flex-wrap  text-white gap-2 justify-start items-end pt-8">
        
         <div className="flex flex-row justify-center gap-4 w-full">
             <div className="flex flex-col items-start">
-                <label htmlFor="" className='mt-4 mb-4' >*Nombre</label>
+                <label htmlFor="" className='my-2 font-semibold text-[14px]' >
+                    Nombre
+                    <span className='text-indigo-400'> *</span>
+                </label>
                 <Input value={FormLoginUser.name}
-                onChange={(e)=>setFormLoginUser({...FormLoginUser,name:e.target.value})} className='w-100' placeholder='ingrese su nombre'></Input>
+                required
+                onChange={(e)=>setFormLoginUser({...FormLoginUser,name:e.target.value})} 
+                className='w-50 h-12 border-white/20' placeholder='Ejem.. Juan'></Input>
             </div>
             <div className="flex flex-col items-start">
-                <label htmlFor="" className='mt-4 mb-4'>*Apellido</label>
-                <Input value={FormLoginUser.last_name} 
-                onChange={(e)=>setFormLoginUser({...FormLoginUser,last_name:e.target.value})} className='w-100' placeholder='ingrese un apellido'></Input>
+                <label htmlFor="" className='my-2 font-semibold text-[14px]'>
+                    Apellido
+                    <span className='text-indigo-400'> *</span>
+                </label>
+                <Input value={FormLoginUser.last_name}
+                required 
+                onChange={(e)=>setFormLoginUser({...FormLoginUser,last_name:e.target.value})} 
+                className='w-50 h-12 border-white/20' placeholder='Ejem..Tapia'></Input>
             </div>
         </div>
         <div className="flex flex-row justify-center gap-4 w-full ">
             <div className="flex flex-col items-start">
-                <label htmlFor="" className='mt-4 mb-4'>*Correo electronico</label>
-                <Input value={FormLoginUser.email} 
-                onChange={(e)=>setFormLoginUser({...FormLoginUser,email:e.target.value})} className='w-100' placeholder='ingrese su correo electronico'></Input>
+                <label htmlFor="" className='my-2 font-semibold text-[14px]'>
+                    Correo electronico
+                    <span className='text-indigo-400'> *</span>
+                </label>
+                <Input value={FormLoginUser.email}
+                type='email'
+                required 
+                onChange={(e)=>setFormLoginUser({...FormLoginUser,email:e.target.value})} 
+                className='w-105 h-12 border-white/20' placeholder='Ejem...Juantapia@gmail.com'></Input>
             </div>
-            <div className="flex flex-col items-start">
-                <label htmlFor="" className='mt-4 mb-4'>*Telefono</label>
-                <Input value={FormLoginUser.number} 
-                onChange={(e)=>setFormLoginUser({...FormLoginUser,number:e.target.value})} className='w-100' placeholder='ingrese su telefono'></Input>
-            </div>
+           
         </div>
         <div className="flex flex-row justify-center items-end  gap-4 w-full">
             <div className="flex flex-col items-start">
-                <label htmlFor="" className='mt-4 mb-4'>*Password</label>
+                <label htmlFor="" className='my-2 font-semibold text-[14px]'>
+                    Password
+                    <span className='text-indigo-400'> *</span>
+                </label>
                 <Input value={FormLoginUser.password} 
-                onChange={(e)=>setFormLoginUser({...FormLoginUser,password:e.target.value})} className='w-150' placeholder='ingrese su nueva contraseña'></Input>
+                required
+                onChange={(e)=>setFormLoginUser({...FormLoginUser,password:e.target.value})} className='w-50 h-12 border-white/20' placeholder='********'></Input>
             </div>
-            <div className="px-8">
+            <div className="flex flex-col items-start">
+                <label htmlFor="" className='my-2 font-semibold text-[14px]'>
+                    Telefono
+                    <span className='text-indigo-400'> *</span> 
+                </label>
+                <Input value={FormLoginUser.number}
+                type='tel' required
+                maxLength={9} 
+                onChange={(e)=>setFormLoginUser({...FormLoginUser,number:e.target.value})} className='w-50 h-12 border-white/20' placeholder='Ejem...991424142'></Input>
+            </div>
+            
+        </div>
+        <div className="flex flex-col justify-center items-center  gap-4 w-full">
+            <div className="py-4">
                
-                    <Button className='cursor-pointer bg-black hover:bg-indigo-500' onClick={handleSubmit} >Enviar Datos</Button>
+                    <Button className='cursor-pointer bg-indigo-500 hover:bg-black w-105' onClick={handleSubmit} >Registrarse</Button>                  
                 
+            </div>
+            <div className="flex flex-row gap-2">
+                <p>¿Ya tienes una cuenta? </p>
+                <span className='text-indigo-400'> Iniciar Session</span>
             </div>
         </div>
         
