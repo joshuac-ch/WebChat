@@ -5,6 +5,11 @@ import { useState } from "react";
 import Chats from "./Components/chats/Chats";
 import Channels from "./Components/Channels";
 import Post from "./Components/Post";
+import Apps from "./Components/Apps";
+import Media from "./Components/Media";
+import Links from "./Components/Links";
+import Files from "./Components/Files";
+import Music from "./Components/Music";
 
 
 export default function Buscardor() {
@@ -44,8 +49,18 @@ export default function Buscardor() {
           <Chats search={InputBusqueda}></Chats>
           :busqueda==="channels"?
           <Channels search={InputBusqueda}></Channels>
+          :busqueda==="apps"?
+          <Apps></Apps>
           :busqueda==="post"?
           <Post></Post>
+          :busqueda==="media"?
+          <Media></Media>
+          :busqueda==="links"?
+          <Links></Links>
+          :busqueda==="files"?
+          <Files></Files>
+          :busqueda==="music"?
+          <Music></Music>
           :""}
         </div>   
    </div>
