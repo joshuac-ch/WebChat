@@ -25,21 +25,32 @@ export default function Clip({onPreview,OnState,OnFile}:ClipProps) {
   return (
     <>
     <input type="file" accept="image/*" name="" className="hidden" onChange={(e)=>OpenFile(e.target.files?.[0])} ref={fileref}  id="" />
-    <Menubar>
+    <Menubar className="bg-zinc-800 border-0">
         <MenubarMenu>
             <MenubarTrigger><Paperclip className="w-6 h-6"></Paperclip></MenubarTrigger>
             <MenubarContent>
-                <MenubarItem >
-                    <Button onClick={()=>fileref.current?.click()}><Image></Image></Button>                    
-                    Photo
+                <MenubarItem className="cursor-pointer" onClick={()=>fileref.current?.click()} >
+                    <Button className="h-5 w-5 p-3" >
+                      <Image></Image>
+                    </Button>                    
+                    <p>Foto</p>
+
                 </MenubarItem>
                 <MenubarSeparator />
-                <MenubarItem><File></File> File
+                <MenubarItem className="cursor-pointer">
+                  <Button className="h-5 w-5 p-3">
+                    <File></File> 
+                  </Button>
+                  <p>File</p>
                
                 </MenubarItem>
                 <MenubarSeparator />
-                <MenubarItem><NotebookText></NotebookText> Encuesta
-                
+                <MenubarItem className="cursor-pointer">
+                  <Button className="h-5 w-5 p-3">
+                    <NotebookText></NotebookText>
+                  </Button>
+                  <p>Encuesta</p> 
+
                 </MenubarItem>            
             </MenubarContent>
         </MenubarMenu>
