@@ -37,22 +37,25 @@ export default function SignIn() {
         </div>
     <div className="flex flex-col items-center">
             <div className="flex flex-col">
-        <p className='text-start'>Iniciar Session</p>
+        <p className='text-start font-semibold text-[14px]'>Correo Electronico</p>
        <Input 
        className='w-80'
        onChange={(e)=>setuserLogin({...userLogin,email:e.target.value})} value={userLogin.email}></Input>
     </div>
      <div className="flex flex-col mt-4 ">
-        <p className='text-start'>Contraseña</p>
+        <div className="flex flex-row justify-between">
+            <p className='font-semibold text-[14px]'>Contraseña</p>
+            <p className='text-indigo-400 font-semibold text-[14px]'>¿Olvidate tu contraseña?</p>
+        </div>
        <Input 
        className='w-80'
        onChange={(e)=>setuserLogin({...userLogin,password:e.target.value})} value={userLogin.password}></Input>
     </div>
     <div className="mt-4">
-        <Button className='w-80 bg-indigo-500' onClick={onLogin}>Iniciar Session</Button>
+        <Button className='w-80 bg-indigo-500 ' onClick={onLogin}>Iniciar Session</Button>
     </div>
     <div className="flex flex-row items-end w-80 mt-4 justify-end">
-        <Link to={"/login"}>Registrarse</Link>
+        <Link to={"/login"}>¿No tienes Cuenta? Registrarte</Link>
     </div>
     </div>
     </div>
