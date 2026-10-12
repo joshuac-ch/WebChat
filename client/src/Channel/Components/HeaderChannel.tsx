@@ -5,7 +5,7 @@ import { Search } from 'lucide-react'
 
 
 export default function HeaderChannel({data,setrigthstate}) {
-       
+     
   return (
     <div className="pt-2 pb-2 pl-6 pr-6 bg-zinc-800 flex flex-row justify-between items-center">
         <div className="flex flex-row items-center gap-4">
