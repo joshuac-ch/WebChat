@@ -11,18 +11,20 @@ import { ArrowUpRight } from 'lucide-react'
 import RightLayout from '@/layout/components/RightLayout'
 
 export default function ChannelSpecific() {
-    const {id}=useParams()
+    const {canalid,id}=useParams()
     const {channelSpecific,ChannelSpecific}=useHomeStore()
-    const {userA}=useUserStore()
+    const {userA,FectUserProfile}=useUserStore()
     const [DataChannel,setDataChannel]=useState({
       create:channelSpecific?.createdAt,
       foto:channelSpecific?.image            
     })
+   
     useEffect(()=>{
-        if(id){
-          ChannelSpecific(id)          
+        console.log("ID seleccionado:", canalid);
+        if(canalid){
+          ChannelSpecific(canalid)          
         }
-    },[ChannelSpecific,id])
+    },[canalid,ChannelSpecific])
     useEffect(()=>{
       if(channelSpecific){
         setDataChannel({create:channelSpecific?.createdAt,foto:channelSpecific.image})
@@ -30,7 +32,22 @@ export default function ChannelSpecific() {
     },[channelSpecific])
     const {messagesChannel}=useMessageStore()
     const [showstate, setshowstate] = useState(false)
-    
+    const [perfiles, setperfiles] = useState({})
+    useEffect(()=>{
+      messagesChannel?.forEach(async(m)=> {
+        const id=m.User[0]
+        if (id&& id!==userA._id && !perfiles[id]){
+          const user = await FectUserProfile(id);
+          if (user) {
+            setperfiles(prev => ({
+              ...prev,
+              [id]: user
+            }));
+          }
+        }        
+      });
+    },[messagesChannel])
+    console.log("Mensajes canal",messagesChannel)
   return (
     <>
     <div className="text-white flex flex-col h-200 justify-start w-full">
@@ -55,11 +72,23 @@ export default function ChannelSpecific() {
                messagesChannel.map((m,i)=>{
                 const texto=m.type=="text"
                 const mix=m.type=="mix"
+                const isMe=m.User[0]==userA._id
+                const id=m.User?.[0]
+                const perfil = id === userA._id
+                  ? userA.profile
+                  : perfiles[id]?.profile;
                 return(
-                  <div className="" key={i}>
+                  <div className={`relative flex items-end group w-full gap-2    ${isMe?"justify-end":"justify-start"} `} key={i}>
              
+                  {!isMe&&(
+                        <div className="">
+                          <img src={perfil} className='h-10 w-10 rounded-full ' alt="" />
+                        </div>
+                      )}
+
                   {texto&&(
-                    <div key={i} className="relative flex flex-row items-end group">
+                    <div key={i} className="relative flex flex-row gap-2 items-end group">
+                      
                     <div  className='relative p-2 rounded-md max-w-100 min-w-25 min-h-15  bg-zinc-800'>
                     <p className='text-start'>{m.content}</p>
                     <div className="">
@@ -67,6 +96,7 @@ export default function ChannelSpecific() {
                     </div>
                     
                   </div>
+                  
                   <div className="cursor-pointer ml-2 border-2  border-white/20 bg-zinc-800 rounded-md hidden group-hover:block transition-all duration-300 ">
                       <ArrowUpRight />
                     </div>
@@ -89,6 +119,12 @@ export default function ChannelSpecific() {
                     </div>
                   </div>
                 )}
+
+                {isMe&&(
+                  <div className="">
+                    <img src={perfil} className='h-10 w-10 rounded-full ' alt="" />
+                  </div>
+                      )}
                    
                   </div>
                 )   
@@ -102,7 +138,7 @@ export default function ChannelSpecific() {
        </ScrollArea>
           </div>
           <div className="flex flex-row justify-center">
-            <SearchComponent userID={userA?._id} channelID={id}></SearchComponent>
+            <SearchComponent userID={userA?._id} channelID={canalid}></SearchComponent>
           </div>
         </div>
         <div className="">
